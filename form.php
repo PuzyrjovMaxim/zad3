@@ -20,10 +20,18 @@
   <input type="radio" name="limbs" value="3">
   <input type="radio" name="limbs" value="4">
   <input type="radio" name="limbs" value="5">
-  
-  <label>Ваша Биография: </label>
-  <textarea name="field-name-2"></textarea>
   <input type="submit" value="ok" />
+  <div>
+  <label>ABILITY: </label>
+  <select name="ability" multiple="multiple">
+    <option value="0">Бессмертие</option>
+    <option value="1">Прохождение сквозь стены</option>
+    <option value="2">Левитация</option>
+    <option value="3">Автоперевод</option>
+  </select>
+  </div>
+  <label>Ваша Биография: </label>
+  <textarea name="biography"></textarea>
 
 </form>
 
