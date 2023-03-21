@@ -35,6 +35,11 @@ if (empty($_POST['email']) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
   $errors = TRUE;
 }
 
+if (empty($_POST['biography'])) {
+  print('Заполните биогрфаию.<br/>');
+  $errors = TRUE;
+}
+
 
 // *************
 // Тут необходимо проверить правильность заполнения всех остальных полей.
@@ -49,13 +54,23 @@ if ($errors) {
 
 $user = 'u47770'; // Заменить на ваш логин uXXXXX
 $pass = '445614'; // Заменить на пароль, такой же, как от SSH
-$db = new PDO('mysql:host=localhost;dbname=u47770', $user, $pass,
-  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+$db = new PDO('mysql:host=localhost;dbname=u47770',
+$user,
+$pass,
+[PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application SET name = ?");
-  $stmt->execute([$_POST['fio']]);
+  $stmt = $db->prepare("INSERT INTO application SET fio = ?, email = ?, year = ?, sex = ?, limbs = ?, ability = ?, biography = ?");
+  $stmt->execute([$_POST['fio']], $_POST['email'], $_POST['year'], $_POST['sex'], $_POST['limbs'], $_POST['biography']);
+  $application_id = $db -> lastInsertId();
+
+  foreach($_POST['ability'] as $ability)
+  {
+  $application_ability = $db->prepare("INSERT AUTO application_abiblity SET application_id = ?, ability_id = ?");
+  $application_ability -> execute([[$application_id],$_POST['ability'][$i]]);
+  }
+  
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
