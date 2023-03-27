@@ -2,23 +2,23 @@ CREATE TABLE application (
  id int(10) unsigned NOT NULL DEFAULT 0,
  name varchar(128) NOT NULL DEFAULT '',
  email varchar(128) NOT NULL DEFAULT '',
- bithyear int(10) unsigned NOT NULL DEFAULT 0,
+ year int(10) unsigned NOT NULL DEFAULT 0,
  sex int(10) unsigned NOT NULL DEFAULT 0,
  limbs int(10) unsigned NOT NULL DEFAULT 0,
- xxx int(10) unsigned NOT NULL DEFAULT 0,
+ ability int(10) unsigned NOT NULL DEFAULT 0,
  biography text(1024) NOT NULL DEFAULT '',
  PRIMARY KEY (id)
 );
 
 CREATE TABLE ability (
  id int(10) unsigned NOT NULL AUTO_INCREMENT,
- title int(4) NOT NULL DEFAULT '',
+ title int(4) NOT NULL DEFAULT 0,
  PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE application_ability (
  id int(10) unsigned NOT NULL AUTO_INCREMENT,
  application_id int(10) NOT NULL DEFAULT 0,
  ability_id int(10) NOT NULL DEFAULT 0,
  PRIMARY KEY(id)
-)
+);
