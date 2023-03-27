@@ -24,19 +24,16 @@ if (empty($_POST['fio'])) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
 }
-
 if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/', $_POST['year'])) {
   print('Заполните год.<br/>');
   $errors = TRUE;
 }
-
-if (empty($_POST['email']) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  $emailErr = "Invalid email format";
+if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+  print('Заполните почту правильно.<br/>');
   $errors = TRUE;
 }
-
 if (empty($_POST['biography'])) {
-  print('Заполните биогрфаию.<br/>');
+  print('Заполните биографию.<br/>');
   $errors = TRUE;
 }
 
@@ -54,23 +51,19 @@ if ($errors) {
 
 $user = 'u47770'; // Заменить на ваш логин uXXXXX
 $pass = '445614'; // Заменить на пароль, такой же, как от SSH
-$db = new PDO('mysql:host=localhost;dbname=u47770',
-$user,
-$pass,
-[PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+$db = new PDO('mysql:host=localhost;dbname=u47770', $user, $pass,
+  [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application SET fio = ?, email = ?, year = ?, sex = ?, limbs = ?, ability = ?, biography = ?");
-  $stmt->execute([$_POST['fio']], $_POST['email'], $_POST['year'], $_POST['sex'], $_POST['limbs'], $_POST['biography']);
-  $application_id = $db -> lastInsertId();
-
-  foreach($_POST['ability'] as $ability)
-  {
-  $application_ability = $db->prepare("INSERT AUTO application_abiblity SET application_id = ?, ability_id = ?");
-  $application_ability -> execute([[$application_id],$_POST['ability'][$i]]);
+  $stmt = $db->prepare("INSERT INTO application SET name = ? , email = ?, year = ?, sex = ?, limbs = ?, biography = ?");
+  $stmt->execute([$_POST['fio'], $_POST['email'], $_POST['year'], $_POST['sex'], $_POST['limbs'], $_POST['biography']]);
+  $application_id = $db->lastInsertId();
+  $application_ability = $db->prepare("INSERT INTO application_ability SET  application_id = ?, ability_id = ?");
+  foreach($_POST["ability"] as $ability){   
+    $application_ability->execute([$application_id, $ability]);
+    print($ability);
   }
-  
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
