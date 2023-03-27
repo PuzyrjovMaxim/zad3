@@ -1,9 +1,14 @@
 <form action="" method="POST">
-  <label>FIO</label>
+  <div>
+  <label>fio:</label>
   <input name="fio" />
-  <label>EMAIL</label>
+  </div>
+  <div>
+  <label>email:</label>
   <input name="email" type="email" class = "email">
-  <label>BIRTHYEAR</label>
+  </div>
+  <div>
+  <label>birthyear:</label>
   <select name="year">
     <?php 
     for ($i = 1922; $i <= 2022; $i++) {
@@ -11,28 +16,37 @@
     }
     ?>
   </select>
-  <label>SEX: </label>
-  <input type="radio" name="sex" checked="checked" value="1"> 
-  <input type="radio" name="sex" value="2">
-  <label>Number of limbs: </label>
-  <input type="radio" name="limbs" checked="checked" value="1">
-  <input type="radio" name="limbs" value="2">
-  <input type="radio" name="limbs" value="3">
-  <input type="radio" name="limbs" value="4">
-  <input type="radio" name="limbs" value="5">
-  <input type="submit" value="ok" />
+  </div>
   <div>
-  <label>ABILITY: </label>
-  <select name="ability" multiple="multiple">
-    <option value="0">Бессмертие</option>
-    <option value="1">Прохождение сквозь стены</option>
-    <option value="2">Левитация</option>
-    <option value="3">Автоперевод</option>
+  <label>Пол: </label>
+  <span><input type="radio" name="sex" checked="checked" value="0">М</span>
+  <span><input type="radio" name="sex" value="1">Ж</span>
+  </div>
+  <p></p>
+  <div>
+  <label>Number of limbs: </label>
+  <span><input type="radio" name="limbs" checked="checked" value="1">1</span>
+  <span><input type="radio" name="limbs" value="2">2</span>
+  <span><input type="radio" name="limbs" value="3">3</span>
+  <span><input type="radio" name="limbs" value="4">4</span>
+  <span><input type="radio" name="limbs" value="5">5</span>
+  </div>
+  <p></p>
+  <div>
+  <select name="ability[]" multiple="multiply">
+    <option select="selected" value="1">нет</option>
+    <option value="2">Телепотрация</option>
+    <option value="3">Невидимость</option>
+    <option value="4">Мгновенный перевод</option>
+    <option value="5">полет</option>
   </select>
   </div>
+  <p></p>
+  <div>
   <label>Ваша Биография: </label>
   <textarea name="biography"></textarea>
-
+  </div>
+  <input type="submit" value="ok" />
 </form>
 
 
