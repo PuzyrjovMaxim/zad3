@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 // Проверяем ошибки.
 $errors = FALSE;
-if (empty($_POST['fio'])) {
+if (empty($_POST['name'])) {
   print('Заполните имя.<br/>');
   $errors = TRUE;
 }
@@ -30,6 +30,18 @@ if (empty($_POST['year']) || !is_numeric($_POST['year']) || !preg_match('/^\d+$/
 }
 if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
   print('Заполните почту правильно.<br/>');
+  $errors = TRUE;
+}
+if (empty($_POST['sex'])) {
+  print('Заполните имя.<br/>');
+  $errors = TRUE;
+}
+if (empty($_POST['limbs'])) {
+  print('Заполните имя.<br/>');
+  $errors = TRUE;
+}
+if (empty($_POST['ability'])) {
+  print('Заполните имя.<br/>');
   $errors = TRUE;
 }
 if (empty($_POST['biography'])) {
@@ -57,7 +69,7 @@ $db = new PDO('mysql:host=localhost;dbname=u47770', $user, $pass,
 // Подготовленный запрос. Не именованные метки.
 try {
   $stmt = $db->prepare("INSERT INTO application SET name = ? , email = ?, year = ?, sex = ?, limbs = ?, biography = ?");
-  $stmt->execute([$_POST['fio'], $_POST['email'], $_POST['year'], $_POST['sex'], $_POST['limbs'], $_POST['biography']]);
+  $stmt->execute([$_POST['name'], $_POST['email'], $_POST['year'], $_POST['sex'], $_POST['limbs'], $_POST['biography']]);
   $application_id = $db->lastInsertId();
   $application_ability = $db->prepare("INSERT INTO application_ability SET  application_id = ?, ability_id = ?");
   foreach($_POST["ability"] as $ability){   
