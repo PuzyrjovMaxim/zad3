@@ -1,7 +1,7 @@
 <form action="" method="POST">
   <div>
   <label>fio:</label>
-  <input name="fio" />
+  <input name="name" />
   </div>
   <div>
   <label>email:</label>
@@ -19,13 +19,13 @@
   </div>
   <div>
   <label>Пол: </label>
-  <span><input type="radio" name="sex" checked="checked" value="0">М</span>
+  <span><input type="radio" name="sex" value="0">М</span>
   <span><input type="radio" name="sex" value="1">Ж</span>
   </div>
   <p></p>
   <div>
   <label>Number of limbs: </label>
-  <span><input type="radio" name="limbs" checked="checked" value="1">1</span>
+  <span><input type="radio" name="limbs" value="1">1</span>
   <span><input type="radio" name="limbs" value="2">2</span>
   <span><input type="radio" name="limbs" value="3">3</span>
   <span><input type="radio" name="limbs" value="4">4</span>
@@ -34,7 +34,7 @@
   <p></p>
   <div>
   <select name="ability[]" multiple="multiply">
-    <option select="selected" value="1">нет</option>
+    <option value="1">нет</option>
     <option value="2">Телепотрация</option>
     <option value="3">Невидимость</option>
     <option value="4">Мгновенный перевод</option>
@@ -45,6 +45,9 @@
   <div>
   <label>Ваша Биография: </label>
   <textarea name="biography"></textarea>
+  </div>
+  <div>
+    <input name="check" type="checkbox"> Я согласен дать данные <br>
   </div>
   <input type="submit" value="ok" />
 </form>
